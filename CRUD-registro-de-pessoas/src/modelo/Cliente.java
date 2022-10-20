@@ -13,7 +13,27 @@ public class Cliente {
 		this.idade = idade;
 		this.cpf = cpf;
 		this.cidade = cidade;
-		this.cpf = cpf;
+		this.estado = estado;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public int getIdade() {
+		return idade;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+	
+	public String getEstado() {
+		return estado;
 	}
 	
 	@Override
