@@ -14,10 +14,20 @@ public class ClienteDAO {
 	private PreparedStatement pstmt;
 	private Statement stmt;
 	
-	public ClienteDAO() {
+	public void iniciarConexao() {
 		conexao = getConexao();
 	}
 	
+	public void fecharConexao() {
+		try {
+			if(!conexao.isClosed()) {
+				conexao.close();
+			}
+		} 
+		catch (SQLException e) {
+			System.out.println("");
+		}
+	}
 	private Connection getConexao() {
 			
 		try {
