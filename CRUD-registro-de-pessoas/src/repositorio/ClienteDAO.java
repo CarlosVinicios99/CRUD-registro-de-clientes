@@ -60,7 +60,7 @@ public class ClienteDAO {
 		}
 	}
 	
-	public boolean inserirCliente(Cliente cliente) throws SQLException {	
+	public void inserirCliente(Cliente cliente) throws SQLException {	
 		String sql = 
 			"""
 				INSERT INTO clientes (nome, idade, cpf, cidade, estado) 
@@ -74,9 +74,7 @@ public class ClienteDAO {
 		pstmt.setString(3, cliente.getCpf());
 		pstmt.setString(4, cliente.getCidade());
 		pstmt.setString(5, cliente.getEstado());
-		
-		return pstmt.execute();
-
+		pstmt.execute();
 	}
 	
 	public Cliente buscarCliente(String cpf_consulta) throws SQLException {
@@ -104,7 +102,7 @@ public class ClienteDAO {
 		return null;
 	}
 	
-	public boolean alterarCliente(String cpf, String cidade, String estado) throws SQLException {
+	public void alterarCliente(String cpf, String cidade, String estado) throws SQLException {
 		String sql = 
 			"""
 				UPDATE clientes SET cidade = ?, estado = ? WHERE cpf = ?;
@@ -114,10 +112,10 @@ public class ClienteDAO {
 		pstmt.setString(1, cidade);
 		pstmt.setString(2, estado);
 		pstmt.setString(3, cpf);
-		return pstmt.execute();
+		pstmt.execute();
 	}
 	
-	public boolean excluirCliente(String cpf) throws SQLException {
+	public void excluirCliente(String cpf) throws SQLException {
 		String sql = 
 			"""
 				DELETE FROM clientes WHERE cpf = ?;
@@ -125,7 +123,7 @@ public class ClienteDAO {
 		
 		pstmt = conexao.prepareStatement(sql);
 		pstmt.setString(1, cpf);	
-		return pstmt.execute();
+		pstmt.execute();
 	}
 		
 }

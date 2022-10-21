@@ -57,10 +57,7 @@ public class TelaConsole {
 				Cliente cliente = new Cliente(nome, idade, cpf, cidade, estado);
 				
 				try {
-					boolean resultado = clienteDAO.inserirCliente(cliente);	
-					if(resultado) {
-						System.out.println("Insercao Realizada com Sucesso!");
-					}			
+					clienteDAO.inserirCliente(cliente);		
 				}
 				catch(SQLException e) {
 					System.out.println("Erro na insercao de dados!");
@@ -72,22 +69,22 @@ public class TelaConsole {
 				System.out.print("Digite o cpf: ");
 				cpf = entrada.nextLine();
 				
-			try {
-				Cliente clienteBusca = clienteDAO.buscarCliente(cpf);
+				try {
+					Cliente clienteBusca = clienteDAO.buscarCliente(cpf);
+					
+					if(clienteBusca != null) {
+						System.out.println(clienteBusca);
+					}
+					
+					else {
+						System.out.println("Cliente nao cadastrado!");
+					}
+					
+				} 
 				
-				if(clienteBusca != null) {
-					System.out.println(clienteBusca);
+				catch (SQLException e) {
+					System.out.println("Erro na consulta de dados!");
 				}
-				
-				else {
-					System.out.println("Cliente nao cadastrado!");
-				}
-				
-			} 
-			
-			catch (SQLException e) {
-				System.out.println("Erro na consulta de dados!");
-			}
 				
 				break;
 				
@@ -103,10 +100,7 @@ public class TelaConsole {
 				
 				
 				try {
-					boolean resultado = clienteDAO.alterarCliente(cpf, cidade, estado);
-					if(resultado) {
-						System.out.println("Atualizacao feita com sucesso!");
-					}
+					clienteDAO.alterarCliente(cpf, cidade, estado);
 				} 
 			
 				catch (SQLException e) {
@@ -120,10 +114,7 @@ public class TelaConsole {
 				cpf = entrada.nextLine();
 				
 				try {
-					boolean resultado = clienteDAO.excluirCliente(cpf);	
-					if(resultado) {
-						System.out.println("Exclusao feita com sucesso!");
-					}
+					clienteDAO.excluirCliente(cpf);	
 				}
 				catch(SQLException e) {
 					System.out.println("Erro na exclusao de dados!");
