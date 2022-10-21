@@ -91,30 +91,44 @@ public class TelaConsole {
 				
 				break;
 				
-			case 3:
-				System.out.print("Digite o nome: ");
-				nome = entrada.nextLine();
-				
+			case 3:	
 				System.out.print("Digite o cpf: ");
 				cpf = entrada.nextLine();
 				
-				System.out.print("Digite o cpf: ");
+				System.out.print("Digite sua cidade atual: ");
 				cidade = entrada.nextLine();
 				
-				System.out.print("Digite o cpf: ");
+				System.out.print("Digite seu estado atual: ");
 				estado = entrada.nextLine();
 				
-				clienteDAO.alterarCliente(nome, cpf, cidade, estado);
+				
+				try {
+					boolean resultado = clienteDAO.alterarCliente(cpf, cidade, estado);
+					if(resultado) {
+						System.out.println("Atualizacao feita com sucesso!");
+					}
+				} 
+			
+				catch (SQLException e) {
+					System.out.println("Erro de atualizacao de dados!");
+					e.printStackTrace();
+				}
 				break;
 				
 			case 4:
-				System.out.print("Digite o nome: ");
-				nome = entrada.nextLine();
-				
 				System.out.print("Digite o cpf: ");
 				cpf = entrada.nextLine();
-				clienteDAO.excluirCliente(nome, cpf);
 				
+				try {
+					boolean resultado = clienteDAO.excluirCliente(cpf);	
+					if(resultado) {
+						System.out.println("Exclusao feita com sucesso!");
+					}
+				}
+				catch(SQLException e) {
+					System.out.println("Erro na exclusao de dados!");
+					e.printStackTrace();
+				}
 				break;
 				
 			case 5:

@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 import modelo.Cliente;
@@ -15,7 +14,6 @@ public class ClienteDAO {
 	
 	private Connection conexao;
 	private PreparedStatement pstmt;
-	private Statement stmt;
 	
 	public void iniciarConexao() {
 		conexao = getConexao();
@@ -106,12 +104,28 @@ public class ClienteDAO {
 		return null;
 	}
 	
-	public boolean alterarCliente(String nome, String cpf, String cidade, String estado) {
-		return false;
+	public boolean alterarCliente(String cpf, String cidade, String estado) throws SQLException {
+		String sql = 
+			"""
+				UPDATE clientes SET cidade = ?, estado = ? WHERE cpf = ?;
+			""";
+		
+		pstmt = conexao.prepareStatement(sql);
+		pstmt.setString(1, cidade);
+		pstmt.setString(2, estado);
+		pstmt.setString(3, cpf);
+		return pstmt.execute();
 	}
 	
-	public boolean excluirCliente(String nome, String cpf) {
-		return false;
+	public boolean excluirCliente(String cpf) throws SQLException {
+		String sql = 
+			"""
+				DELETE FROM clientes WHERE cpf = ?;
+			""";
+		
+		pstmt = conexao.prepareStatement(sql);
+		pstmt.setString(1, cpf);	
+		return pstmt.execute();
 	}
 		
 }
