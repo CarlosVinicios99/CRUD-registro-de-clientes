@@ -1,0 +1,11 @@
+import visao.TelaConsole;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		
+		new TelaConsole();
+		
+	}
+
+}
